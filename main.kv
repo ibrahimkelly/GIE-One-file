@@ -12,7 +12,7 @@
     addYearButton: addYearButton.__self__
     paie_tab: paie_tab
     detteMontant: detteMontant
-    listDette: listDette.__self__
+    listDette: list_dette
     totalPaiement: total_paiement
     MDNavigationLayout:
         ScreenManager:
@@ -41,9 +41,9 @@
                     pos_hint: {"top": 1}
                     left_action_items: [['arrow-left-circle', lambda x: app.backToHome()]]
                     right_action_items: [['calendar', lambda x: root.show_date_picker()]]
+
                 MDSwiper:
                     items_spacing: '0dp'
-                    on_swipe: root.getEmployeesDetteList()
                     MDSwiperItem:
                         MDBoxLayout:
                             orientation: "vertical"
@@ -225,6 +225,7 @@
                                     InfosLabel:
                                         id: total_paiement
 
+                    # Credits swiper Item
                     MDSwiperItem:
                         MDBoxLayout:
                             orientation: "vertical"
@@ -272,9 +273,15 @@
                                 adaptive_height: True
                                 height: (root.height*.60)
                                 padding: '24dp'
+                                MDLabel:
+                                    text: "Hello World"
+                                    halign: "center"
+
                                 ScrollView:
                                     MDList:
-                                        id: listDette
+                                        id: list_dette
+                                        OneLineListItem:
+                                            text: "John Doe"
 
         MDNavigationDrawer:
             id: nav_drawer

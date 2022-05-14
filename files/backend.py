@@ -185,7 +185,6 @@ class DataBase:
         """
         self.curseur.execute(query)
         self.connection.commit()
-        print("Great !")
 
     def getUserForUpdate(self, id: int) -> list[any]:
         query = """
@@ -237,7 +236,6 @@ class DataBase:
         """
         self.curseur.execute(query)
         self.connection.commit()
-        print("Epargne updated...", id)
 
 if __name__ == "__main__":
     backend = DataBase()

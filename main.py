@@ -3,11 +3,13 @@ import datetime
 from kivymd.app import MDApp
 from kivy.properties import ObjectProperty
 from kivymd.uix.boxlayout import MDBoxLayout
-from kivymd.uix.list import ThreeLineIconListItem
 
 from kivy.clock import Clock
 from kivy.uix.widget import WidgetException
+from kivymd.uix.list import ThreeLineIconListItem
 from kivymd.uix.list import OneLineIconListItem
+
+from kivymd.uix.list import OneLineListItem
 from kivymd.uix.pickers import MDDatePicker
 
 from components.listComponent.List import List
@@ -53,6 +55,7 @@ class Body(MDBoxLayout):
 
         self.hide_button()
         self.get_employee_details()
+        self.getEmployeesDetteList()
 
     def updateSomme(self, year: int) -> int:
         self.backend.updateTotal(self.id, year)
@@ -151,15 +154,17 @@ class Body(MDBoxLayout):
 
     def getEmployeesDetteList(self) -> None:
         """MDList for credits on allowed to an employee"""
-        self.listDette.clear_widgets()
+        # self.listDette.clear_widgets()
         dettes = self.backend.getEmployeesDetteList(self.id)
         for i in range(len(dettes)):
-            self.listDette.add_widget(
-                OneLineIconListItem(
-                    text=f'[b]{dettes[i][2]} [color=#ff0]{dettes[i][3]} F CFA[/color][/b]',
-                    bg_color=(0, 0, 0) if i%2==0 else (0, 0, 1)
-                )
-            )
+            print(dettes[i])
+            # self.listDette.add_widget(
+            #     OneLineListItem(text=f"Single-line item {i}")
+                # OneLineIconListItem(
+                #     text=f'[b]{dettes[i][2]} [color=#ff0]{dettes[i][3]} F CFA[/color][/b]',
+                #     bg_color=(0, 0, 0) if i%2==0 else (0, 0, 1)
+                # )
+            # )
 
     def getSommeDette(self) -> int:
         """Get somme of credits allowed to employee"""
@@ -269,7 +274,6 @@ class Main(MDApp):
     ):
         if tab_text == 'Employers':
             employees_list = self.backend.getEmployeesByNom('tous')
-            print('Employees list ', employees_list)
             instance_tab.ids.listContainer.clear_widgets()
             for i in range(len(employees_list)):
                 instance_tab.ids.listContainer.add_widget(
